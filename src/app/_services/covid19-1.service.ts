@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Covid19DataClass } from '../_models/covid19';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class Covid191Service {
   constructor(private http: HttpClient) { }
 
   getData() {
-    return this.http.get(this.urlUK);
+    return this.http.get<Covid19DataClass>(this.urlUK);
   }
 
 }
