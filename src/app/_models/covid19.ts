@@ -21,3 +21,15 @@ export class Covid19DataClass {
     tests: number;
     testsPerOneMillion: number;
 }
+
+export class HistoricalDataClass {
+    country: string;
+    province: null | string;
+    timeline: TimeLineClass;
+}
+
+export class TimeLineClass {
+    cases: Object;
+    deaths: Object;
+    recovered: Object;
+}
