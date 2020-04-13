@@ -3,12 +3,12 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { ChartComponent } from './chart/chart.component';
+import { LiveChartComponent } from './live-chart/live-chart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChartComponent
+    LiveChartComponent
   ],
   imports: [
     BrowserModule,

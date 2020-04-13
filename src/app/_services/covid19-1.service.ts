@@ -7,13 +7,13 @@ import { Covid19DataClass, HistoricalDataClass } from '../_models/covid19';
 })
 export class Covid191Service {
 
-  urlCurrentUK: string = 'https://corona.lmao.ninja/countries/UK';
+  urlCurrent: string = 'https://corona.lmao.ninja/countries/';
   urlHistorical: string = 'https://corona.lmao.ninja/v2/historical/';
 
   constructor(private http: HttpClient) { }
 
-  getCurrentUKData() {
-    return this.http.get<Covid19DataClass>(this.urlCurrentUK);
+  getCurrentData(country: string) {
+    return this.http.get<Covid19DataClass>(this.urlCurrent + country);
   }
 
   getHistoricalData() {

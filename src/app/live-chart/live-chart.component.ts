@@ -3,39 +3,39 @@ import { Covid191Service } from '../_services/covid19-1.service';
 import { Covid19DataClass, TimeLineClass, HistoricalDataClass } from '../_models/covid19';
 
 @Component({
-  selector: 'app-chart',
-  templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.scss']
+  selector: 'app-live-chart',
+  templateUrl: './live-chart.component.html',
+  styleUrls: ['./live-chart.component.scss']
 })
-export class ChartComponent implements OnInit {
+export class LiveChartComponent implements OnInit {
 
-  currentUKData: Covid19DataClass;
+  currentLiveCovid19Data: Covid19DataClass;
   historicalData: HistoricalDataClass;
-  ukTimeline: TimeLineClass;
-  country: string = 'Spain';
+  countryTimeline: TimeLineClass;
   countryHistory: TimeLineClass;
+  country: string = 'Russia';
 
   constructor(private covid19: Covid191Service ) { }
 
   ngOnInit() {
-    this.getLiveUKCovid19Data();
+    this.getLiveCovid19Data(this.country);
 
     this.covid19.getHistoricalData()
     .subscribe(
       (history: HistoricalDataClass[]) => {
-      this.getHistoricalData(history, this.country);
+      this.getHistoricalDataForCountry(history, this.country);
     })
   }
 
-  getHistoricalData(history: HistoricalDataClass[], country: string) {
-    console.log('history', history);
+  getHistoricalDataForCountry(history: HistoricalDataClass[], country: string) {
+    // console.log('history', history);
     
     // For UK need to check province is null otherwise it will get provinces in Bermuda, Caymann Islands and Channel Islands etc
     if (country === 'UK') {
       history.forEach(element => {
         if (element.country === 'UK' && element.province === null) {
-          this.ukTimeline = element.timeline;
-          console.log('UK Timeline', this.ukTimeline);
+          this.countryTimeline = element.timeline;
+          // console.log('UK Timeline', this.countryTimeline);
         }
       });
     } else {
@@ -43,17 +43,17 @@ export class ChartComponent implements OnInit {
       history.forEach(element => {
         if (element.country === country) {
           this.countryHistory = element.timeline;
-          console.log(this.country, this.countryHistory);
+          // console.log(this.country, this.countryHistory);
         }
       })
     }
     
   }
 
-  getLiveUKCovid19Data() {
-    this.covid19.getCurrentUKData().subscribe( data => {
-      this.currentUKData = data;
-      console.log('ukData', this.currentUKData);
+  getLiveCovid19Data(country: string) {
+    this.covid19.getCurrentData(country).subscribe( data => {
+      this.currentLiveCovid19Data = data;
+      // console.log('country data', this.currentLiveCovid19Data);
     })
   }
 
