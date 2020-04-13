@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { LiveChartComponent } from './live-chart/live-chart.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './_material/all-angular-material-modules';
 
 @NgModule({
   declarations: [
@@ -12,7 +14,9 @@ import { LiveChartComponent } from './live-chart/live-chart.component';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
