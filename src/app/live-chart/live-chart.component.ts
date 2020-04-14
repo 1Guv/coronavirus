@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Covid191Service } from '../_services/covid19-1.service';
 import { Covid19DataClass, TimeLineClass, HistoricalDataClass } from '../_models/covid19';
+import { HttpErrorResponse } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-live-chart',
@@ -16,20 +18,11 @@ export class LiveChartComponent implements OnInit, OnChanges {
   countryHistory: TimeLineClass;
   // country: string;
 
-  constructor(private covid19: Covid191Service ) { }
+  constructor(
+    private covid19: Covid191Service, 
+    private snackBar: MatSnackBar) { }
 
-  ngOnInit() {
-    console.log('country', this.country);
-    if (this.country) {
-      this.getLiveCovid19Data(this.country);
-
-      this.covid19.getHistoricalData()
-      .subscribe(
-        (history: HistoricalDataClass[]) => {
-        this.getHistoricalDataForCountry(history, this.country);
-      })
-    }
-  }
+  ngOnInit() {}
 
   ngOnChanges(){
     if (this.country) {
@@ -38,20 +31,18 @@ export class LiveChartComponent implements OnInit, OnChanges {
       this.covid19.getHistoricalData()
       .subscribe(
         (history: HistoricalDataClass[]) => {
-        this.getHistoricalDataForCountry(history, this.country);
+          this.getHistoricalDataForCountry(history, this.country);
       })
     }
   }
 
   getHistoricalDataForCountry(history: HistoricalDataClass[], country: string) {
-    // console.log('history', history);
     
     // For UK need to check province is null otherwise it will get provinces in Bermuda, Caymann Islands and Channel Islands etc
     if (country === 'UK') {
       history.forEach(element => {
         if (element.country === 'UK' && element.province === null) {
           this.countryTimeline = element.timeline;
-          // console.log('UK Timeline', this.countryTimeline);
         }
       });
     } else {
@@ -59,7 +50,6 @@ export class LiveChartComponent implements OnInit, OnChanges {
       history.forEach(element => {
         if (element.country === country) {
           this.countryHistory = element.timeline;
-          // console.log(this.country, this.countryHistory);
         }
       })
     }
@@ -67,10 +57,17 @@ export class LiveChartComponent implements OnInit, OnChanges {
   }
 
   getLiveCovid19Data(country: string) {
-    this.covid19.getCurrentData(country).subscribe( data => {
-      this.currentLiveCovid19Data = data;
-      // console.log('country data', this.currentLiveCovid19Data);
-    })
+    this.covid19.getCurrentData(country).subscribe( 
+      data => {
+        this.currentLiveCovid19Data = data;
+      },
+        (err: HttpErrorResponse) => {
+          let currentHttpErrorMessage = err.error.message
+          this.snackBar.open(currentHttpErrorMessage, 'close', {
+            duration: 2000,
+          });
+        }
+      )
   }
 
 } 
