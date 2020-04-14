@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import countriesData from './_json/countries.json';
+import { LiveChartComponent } from './live-chart/live-chart.component';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +10,11 @@ import countriesData from './_json/countries.json';
 export class AppComponent {
   title = 'coronavirus';
   countries: any = countriesData;
+
+  constructor(){}
+
+  onCountrySelected(country: string) {
+    console.log(country);
+  }
 
 }

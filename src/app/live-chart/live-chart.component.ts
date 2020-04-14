@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Covid191Service } from '../_services/covid19-1.service';
 import { Covid19DataClass, TimeLineClass, HistoricalDataClass } from '../_models/covid19';
 
@@ -7,24 +7,40 @@ import { Covid19DataClass, TimeLineClass, HistoricalDataClass } from '../_models
   templateUrl: './live-chart.component.html',
   styleUrls: ['./live-chart.component.scss']
 })
-export class LiveChartComponent implements OnInit {
+export class LiveChartComponent implements OnInit, OnChanges {
 
+  @Input() country: string;
   currentLiveCovid19Data: Covid19DataClass;
   historicalData: HistoricalDataClass;
   countryTimeline: TimeLineClass;
   countryHistory: TimeLineClass;
-  country: string = 'Russia';
+  // country: string;
 
   constructor(private covid19: Covid191Service ) { }
 
   ngOnInit() {
-    this.getLiveCovid19Data(this.country);
+    console.log('country', this.country);
+    if (this.country) {
+      this.getLiveCovid19Data(this.country);
 
-    this.covid19.getHistoricalData()
-    .subscribe(
-      (history: HistoricalDataClass[]) => {
-      this.getHistoricalDataForCountry(history, this.country);
-    })
+      this.covid19.getHistoricalData()
+      .subscribe(
+        (history: HistoricalDataClass[]) => {
+        this.getHistoricalDataForCountry(history, this.country);
+      })
+    }
+  }
+
+  ngOnChanges(){
+    if (this.country) {
+      this.getLiveCovid19Data(this.country);
+
+      this.covid19.getHistoricalData()
+      .subscribe(
+        (history: HistoricalDataClass[]) => {
+        this.getHistoricalDataForCountry(history, this.country);
+      })
+    }
   }
 
   getHistoricalDataForCountry(history: HistoricalDataClass[], country: string) {

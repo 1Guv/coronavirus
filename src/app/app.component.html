@@ -4,13 +4,14 @@
   <div class="m-5">
     <mat-form-field appearance="fill">
       <mat-label>Countries</mat-label>
-      <mat-select>
+      <mat-select [(value)]="selected" (selectionChange)="onCountrySelected(selected)">
         <mat-option *ngFor="let country of countries" [value]="country.name">
           {{country.name}}
         </mat-option>
       </mat-select>
     </mat-form-field>
   </div>
+  
+  <app-live-chart [country]="selected"></app-live-chart>
 
-  <app-live-chart></app-live-chart>
 </div>
