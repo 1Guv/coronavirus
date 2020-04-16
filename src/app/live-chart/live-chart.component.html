@@ -1,3 +1,22 @@
-<p>live chart works!</p>
-<pre>{{country | json}}</pre>
-<pre>{{currentLiveCovid19Data | json}}</pre>
+<!-- <pre>{{currentLiveCovid19Data.country | json}}</pre> -->
+<div class="d-flex text-center justify-content-center align-items-center m-1">
+
+    <mat-card *ngIf="currentLiveCovid19Data?.country" class="example-card mat-elevation-z4">
+        <mat-card-header>
+            <mat-card-title>{{currentLiveCovid19Data.country }}</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image *ngIf="country" src="{{currentLiveCovid19Data?.countryInfo?.flag}}" alt="Country flag">
+        <mat-card-content>
+            <p>Cases: {{currentLiveCovid19Data.cases }}</p>
+            <hr>
+            <p>Deaths: {{currentLiveCovid19Data.deaths }}</p>
+            <hr>
+            <p>Tested: {{currentLiveCovid19Data.tests }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+        </mat-card-actions>
+    </mat-card>
+
+</div>
+
+<!-- <pre>{{currentLiveCovid19Data | json}}</pre> -->
