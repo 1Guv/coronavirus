@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { LiveChartComponent } from './live-chart/live-chart.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './_material/all-angular-material-modules';
+import { MapComponent } from './_elements/map/map.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LiveChartComponent
+    LiveChartComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
