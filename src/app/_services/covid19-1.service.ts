@@ -7,7 +7,7 @@ import { Covid19DataClass, HistoricalDataClass } from '../_models/covid19';
 })
 export class Covid191Service {
 
-  urlCurrent: string = 'https://corona.lmao.ninja/countries/';
+  urlCurrent: string = 'https://corona.lmao.ninja/v2/countries/';
   urlHistorical: string = 'https://corona.lmao.ninja/v2/historical/';
 
   constructor(private http: HttpClient) { }
