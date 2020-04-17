@@ -16,19 +16,24 @@
             </app-map>
     
             <mat-card-content>
-                <div>
-                    <h6>Cases:</h6>
-                    <h1>{{currentLiveCovid19Data.cases | number:'2.'}}</h1>
-                </div>
-                <hr>
-                <div>
-                    <h6>Deaths:</h6>
-                    <h1>{{currentLiveCovid19Data.deaths | number:'2.'}}</h1>
-                </div>
-                <hr>
-                <div>
-                    <h6>Tested:</h6>
-                    <h1>{{currentLiveCovid19Data.tests | number:'2.'}}</h1>
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-4">
+                        <h6>Cases:</h6>
+                        <h1>{{currentLiveCovid19Data.cases | number:'2.'}}</h1>
+                    </div>
+                    
+                    <div class="col-12 col-sm-12 col-md-4">
+                        <hr class="d-block d-sm-block d-md-none">
+                        <h6>Deaths:</h6>
+                        <h1>{{currentLiveCovid19Data.deaths | number:'2.'}}</h1>
+                        <hr class="d-block d-sm-block d-md-none">
+                    </div>
+                    
+                    <div class="col-12 col-sm-12 col-md-4">
+                        <h6>Tested:</h6>
+                        <h1>{{currentLiveCovid19Data.tests | number:'2.'}}</h1>
+                    </div>
+
                 </div>
             </mat-card-content>
             <mat-card-actions>
