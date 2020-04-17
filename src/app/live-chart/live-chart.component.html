@@ -1,6 +1,6 @@
 <!-- <pre>{{currentLiveCovid19Data.country | json}}</pre> -->
 <div class="row">
-    <div class="col-12 mx-auto">
+    <div class="col-12 col-xl-10 mx-auto">
         <mat-card *ngIf="currentLiveCovid19Data?.country" class="w-100 mat-elevation-z4">
             <mat-card-header>
                 <div class="d-flex flex-row">
@@ -18,17 +18,17 @@
             <mat-card-content>
                 <div>
                     <h6>Cases:</h6>
-                    <h1>{{currentLiveCovid19Data.cases}}</h1>
+                    <h1>{{currentLiveCovid19Data.cases | number:'2.'}}</h1>
                 </div>
                 <hr>
                 <div>
                     <h6>Deaths:</h6>
-                    <h1>{{currentLiveCovid19Data.deaths}}</h1>
+                    <h1>{{currentLiveCovid19Data.deaths | number:'2.'}}</h1>
                 </div>
                 <hr>
                 <div>
                     <h6>Tested:</h6>
-                    <h1>{{currentLiveCovid19Data.tests}}</h1>
+                    <h1>{{currentLiveCovid19Data.tests | number:'2.'}}</h1>
                 </div>
             </mat-card-content>
             <mat-card-actions>
