@@ -10,6 +10,7 @@ import { LiveChartComponent } from './live-chart/live-chart.component';
 export class AppComponent {
   title = 'coronavirus';
   countries: any = countriesData;
+  selected: string;
 
   constructor(){}
 

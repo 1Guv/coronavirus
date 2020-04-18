@@ -16,6 +16,7 @@ export class LiveChartComponent implements OnInit, OnChanges {
   historicalData: HistoricalDataClass;
   countryTimeline: TimeLineClass;
   countryHistory: TimeLineClass;
+  counto: any;
   // country: string;
 
   constructor(
