@@ -18,20 +18,27 @@
             <mat-card-content>
                 <div class="row">
                     <div class="col-12 col-sm-12 col-md-4">
-                        <h6>Cases:</h6>
-                        <h1>{{currentLiveCovid19Data.cases | number:'2.'}}</h1>
+                        <h6>Tested:</h6>
+                        <h1 counto 
+                            [step]="10" 
+                            [countTo]="currentLiveCovid19Data.tests"
+                            [countFrom]="0"
+                            [duration]="1"
+                            (countoChange)="counto = $event">
+                            {{counto | number}}
+                        </h1>
                     </div>
                     
                     <div class="col-12 col-sm-12 col-md-4">
                         <hr class="d-block d-sm-block d-md-none">
                         <h6>Deaths:</h6>
-                        <h1>{{currentLiveCovid19Data.deaths | number:'2.'}}</h1>
+                        <h1 class="text-danger">{{currentLiveCovid19Data.deaths | number:'2.'}}</h1>
                         <hr class="d-block d-sm-block d-md-none">
                     </div>
-                    
+
                     <div class="col-12 col-sm-12 col-md-4">
-                        <h6>Tested:</h6>
-                        <h1>{{currentLiveCovid19Data.tests | number:'2.'}}</h1>
+                        <h6>Cases:</h6>
+                        <h1>{{currentLiveCovid19Data.cases | number:'2.'}}</h1>
                     </div>
 
                 </div>

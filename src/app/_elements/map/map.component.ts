@@ -40,6 +40,13 @@ export class MapComponent implements AfterViewInit, OnChanges {
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }); 
 
+    var circle = L.circle([this.lat, this.long], {
+        color: 'red',
+        fillColor: '#f03',
+        fillOpacity: 0.5,
+        radius: 100000
+    }).addTo(this.map);
+
     tiles.addTo(this.map);}
 
 }
