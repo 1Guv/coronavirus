@@ -4,6 +4,8 @@ import { Covid19DataClass, TimeLineClass, HistoricalDataClass } from '../_models
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Covid19UKDataClass } from '../_models/covid19UK';
+import { Observable, of } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-live-chart',
@@ -19,16 +21,60 @@ export class LiveChartComponent implements OnInit, OnChanges {
   countryHistory: TimeLineClass;
   counto: any;
   // country: string;
+  countriesInUK$;
+  regionsInUK$: Observable<any[]>;
+  covid19UKData$: Observable<any>;
+
+  arrayOfUKCountries = [];
 
   constructor(
     private covid19: Covid191Service, 
     private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.covid19.getAllCovid19UKData()
-    .subscribe( (data: Covid19UKDataClass[]) => {
-      console.log('All UK Data', data);
-    })
+    // this.covid19.getAllCovid19UKData()
+    // .subscribe( (data: Covid19UKDataClass[]) => {
+    //   console.log('All UK Data', data);
+    // })
+
+    this.covid19UKData$ = this.covid19.getAllCovid19UKData()
+      .pipe(
+        shareReplay(1)
+    );
+
+    this.covid19UKData$.subscribe(
+      allUKData => {
+        console.log('all', allUKData);
+      }
+    );
+
+    this.covid19UKData$.subscribe(
+      allUKData => {
+        console.log('countries', allUKData.countries);
+        console.log('countries 1', allUKData.countries.E92000001.name);
+
+        this.arrayOfUKCountries.push(
+          allUKData.countries.E92000001,
+          allUKData.countries.S92000003, 
+          allUKData.countries.N92000002, 
+          allUKData.countries.W92000004,
+        );
+
+        console.log('arrayOfUKCountries', this.arrayOfUKCountries);
+        this.countriesInUK$ = of(this.arrayOfUKCountries);
+
+      }
+    )
+
+    this.covid19UKData$.subscribe(
+      allUKData => {
+        this.regionsInUK$ = allUKData.regions;
+        console.log('regions', this.regionsInUK$);
+      }
+    )
+    
+
+    // console.log('countriesInUK >', this.countriesInUK$);
   }
 
   ngOnChanges(){
