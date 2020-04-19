@@ -3,6 +3,7 @@ import { Covid191Service } from '../_services/covid19-1.service';
 import { Covid19DataClass, TimeLineClass, HistoricalDataClass } from '../_models/covid19';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Covid19UKDataClass } from '../_models/covid19UK';
 
 @Component({
   selector: 'app-live-chart',
@@ -23,7 +24,12 @@ export class LiveChartComponent implements OnInit, OnChanges {
     private covid19: Covid191Service, 
     private snackBar: MatSnackBar) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.covid19.getAllCovid19UKData()
+    .subscribe( (data: Covid19UKDataClass[]) => {
+      console.log('All UK Data', data);
+    })
+  }
 
   ngOnChanges(){
     if (this.country) {
@@ -58,7 +64,8 @@ export class LiveChartComponent implements OnInit, OnChanges {
   }
 
   getLiveCovid19Data(country: string) {
-    this.covid19.getCurrentData(country).subscribe( 
+    this.covid19.getCurrentData(country)
+    .subscribe( 
       data => {
         this.currentLiveCovid19Data = data;
       },
