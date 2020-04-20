@@ -50,21 +50,26 @@ export class LiveChartComponent implements OnInit, OnChanges {
 
     this.covid19UKData$.subscribe(
       allUKData => {
-        console.log('countries', allUKData.countries);
-        console.log('countries 1', allUKData.countries.E92000001.name);
+        // need to map over the object and not use E92000001 etc
+        // this.arrayOfUKCountries.push(Object.assign({}, allUKData.countries.E92000001));
+        // this.arrayOfUKCountries.push(Object.assign({}, allUKData.countries.S92000003));
+        // this.arrayOfUKCountries.push(Object.assign({}, allUKData.countries.N92000002));
+        // this.arrayOfUKCountries.push(Object.assign({}, allUKData.countries.W92000004));
 
-        this.arrayOfUKCountries.push(
-          allUKData.countries.E92000001,
-          allUKData.countries.S92000003, 
-          allUKData.countries.N92000002, 
-          allUKData.countries.W92000004,
-        );
-
-        console.log('arrayOfUKCountries', this.arrayOfUKCountries);
-        this.countriesInUK$ = of(this.arrayOfUKCountries);
-
+        [...Object.entries(allUKData.countries)].forEach(element => {
+          console.log('element', element);
+          [...Object.entries(element[1])].forEach(e => {
+            console.log('e', e[0], e[1].value);
+            this.arrayOfUKCountries.push(Object.assign({}, e[1]));
+          })
+        });
       }
     )
+
+    console.log('arrayOfUKCountries', this.arrayOfUKCountries);
+
+    this.countriesInUK$ = of(this.arrayOfUKCountries);
+    console.log('this.countriesInUK$', this.countriesInUK$);
 
     this.covid19UKData$.subscribe(
       allUKData => {
