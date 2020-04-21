@@ -22,17 +22,29 @@ export class Covid19UKDataService {
   disclaimer: string;
   lastUpdatedAt: string;
 
+  UK = {
+    disclaimer: '',
+    lastUpdatedAt: '',
+  };
+
   constructor(private http: HttpClient, private snackBar: MatSnackBar) {
     this.getDates();
-    this.getAllCovid19UKData(this.todaysFormattedDate);
+    this.getAllCovid19UKData(this.todaysFormattedDate)
    }
 
   getAllCovid19UKData(dateForUrl: string) {
-    this.http.get<Covid19UKDataClass[]>(this.urlCovid19UKData + dateForUrl + '.json')
+    this.http.get<Covid19UKDataClass>(this.urlCovid19UKData + dateForUrl + '.json')
       .subscribe(
         allUKData => {
           console.log('allUKData 1', allUKData);
+
+          this.UK.disclaimer = allUKData.disclaimer;
+          this.UK.lastUpdatedAt = allUKData.lastUpdatedAt;
+
+          console.log('this.disclaimer', this.UK.disclaimer);
+          console.log('this.lastUpdatedAt', this.UK.lastUpdatedAt);
           
+
           // this.covid19UKData$ = of(allUKData);
           // console.log('allUKData 2', this.covid19UKData$);
 
