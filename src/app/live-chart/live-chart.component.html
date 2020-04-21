@@ -53,6 +53,6 @@
 <!-- <pre>{{currentLiveCovid19Data | json}}</pre> -->
 
 <div *ngFor="let country of countriesInUK$ | async">
-    <pre>{{country.name.value}}, Deaths: {{country.deaths.value}}</pre>
+    <pre>{{country}}, Deaths: {{country.deaths.value}}</pre>
 </div>
 

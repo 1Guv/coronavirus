@@ -214,3 +214,11 @@ export class DataAndValueClass {
 export class ValueClass {
     value: number;
 }
+
+export class UKCountriesClass {
+    totalCases: number;
+    newCases: number;
+    deaths: number;
+    dailyDeaths: Array<[]>
+    dailyTotalDeaths: Array<[]>;
+}

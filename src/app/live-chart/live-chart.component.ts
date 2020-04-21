@@ -3,9 +3,10 @@ import { Covid191Service } from '../_services/covid19-1.service';
 import { Covid19DataClass, TimeLineClass, HistoricalDataClass } from '../_models/covid19';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Covid19UKDataClass } from '../_models/covid19UK';
+import { Covid19UKDataClass, UKCountriesClass } from '../_models/covid19UK';
 import { Observable, of } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { Covid19UKDataService } from '../_services/covid19-uk-data.service';
 
 @Component({
   selector: 'app-live-chart',
@@ -25,61 +26,37 @@ export class LiveChartComponent implements OnInit, OnChanges {
   regionsInUK$: Observable<any[]>;
   covid19UKData$: Observable<any>;
 
-  arrayOfUKCountries = [];
+  arrayOfUKCountries = []
+
+  uk = {
+    england: {
+      totalCases: 0,
+      deaths: 0,
+      dailyDeaths: [],
+      dailyTotalDeaths: [],
+      dailyConfirmedCases: [],
+      dailyTotalConfirmedCases: []
+    },
+
+    scotland: {
+      totalCases: 0,
+      deaths: 0,
+      dailyDeaths: [],
+      dailyTotalDeaths: [],
+      dailyConfirmedCases: [],
+      dailyTotalConfirmedCases: []
+    },
+
+    // wales: UKCountriesClass;
+    // ni: UKCountriesClass;
+  }
 
   constructor(
-    private covid19: Covid191Service, 
+    private covid19: Covid191Service,
+    private covid19UKData: Covid19UKDataService,
     private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    // this.covid19.getAllCovid19UKData()
-    // .subscribe( (data: Covid19UKDataClass[]) => {
-    //   console.log('All UK Data', data);
-    // })
-
-    this.covid19UKData$ = this.covid19.getAllCovid19UKData()
-      .pipe(
-        shareReplay(1)
-    );
-
-    this.covid19UKData$.subscribe(
-      allUKData => {
-        console.log('all', allUKData);
-      }
-    );
-
-    this.covid19UKData$.subscribe(
-      allUKData => {
-        // need to map over the object and not use E92000001 etc
-        // this.arrayOfUKCountries.push(Object.assign({}, allUKData.countries.E92000001));
-        // this.arrayOfUKCountries.push(Object.assign({}, allUKData.countries.S92000003));
-        // this.arrayOfUKCountries.push(Object.assign({}, allUKData.countries.N92000002));
-        // this.arrayOfUKCountries.push(Object.assign({}, allUKData.countries.W92000004));
-
-        [...Object.entries(allUKData.countries)].forEach(element => {
-          console.log('element', element);
-          [...Object.entries(element[1])].forEach(e => {
-            console.log('e', e[0], e[1].value);
-            this.arrayOfUKCountries.push(Object.assign({}, e[1]));
-          })
-        });
-      }
-    )
-
-    console.log('arrayOfUKCountries', this.arrayOfUKCountries);
-
-    this.countriesInUK$ = of(this.arrayOfUKCountries);
-    console.log('this.countriesInUK$', this.countriesInUK$);
-
-    this.covid19UKData$.subscribe(
-      allUKData => {
-        this.regionsInUK$ = allUKData.regions;
-        console.log('regions', this.regionsInUK$);
-      }
-    )
-    
-
-    // console.log('countriesInUK >', this.countriesInUK$);
   }
 
   ngOnChanges(){
