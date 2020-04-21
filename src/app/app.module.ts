@@ -8,12 +8,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './_material/all-angular-material-modules';
 import { MapComponent } from './_elements/map/map.component';
 import { CountoModule }  from 'angular2-counto';
+import { Covid19UKStatsComponent } from './covid19-uk-stats/covid19-uk-stats.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LiveChartComponent,
-    MapComponent
+    MapComponent,
+    Covid19UKStatsComponent
   ],
   imports: [
     BrowserModule,

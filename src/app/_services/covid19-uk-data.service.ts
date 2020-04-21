@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Covid19UKDataClass } from '../_models/covid19UK';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
 import { format } from 'fecha';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Covid19UKStatsComponent } from '../covid19-uk-stats/covid19-uk-stats.component';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +34,7 @@ export class Covid19UKDataService {
       scotland: {},
       ni: {},
       wales: {},
+      totalDeathsInUK: 0,
     },
     regions: {
       westMidlands: {},
@@ -48,7 +49,9 @@ export class Covid19UKDataService {
    }
   };
 
-  constructor(private http: HttpClient, private snackBar: MatSnackBar) {
+  constructor(
+    private http: HttpClient,
+    private snackBar: MatSnackBar) {
     this.getDates();
     this.getAllCovid19UKData(this.todaysFormattedDate)
    }
@@ -90,12 +93,14 @@ export class Covid19UKDataService {
     this.updateUKRegions(UKData.regions);
 
     console.log('UK', this.UK);
-    
+
     let totalDeathsInUK = 
     this.UK.countries.england['deaths'].value + 
     this.UK.countries.scotland['deaths'].value + 
     this.UK.countries.ni['deaths'].value + 
     this.UK.countries.wales['deaths'].value;
+
+    this.UK.countries.totalDeathsInUK = totalDeathsInUK;
 
     console.log('totalDeathsInUK', totalDeathsInUK);
   }
