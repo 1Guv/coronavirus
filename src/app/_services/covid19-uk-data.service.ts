@@ -52,21 +52,20 @@ export class Covid19UKDataService {
   constructor(
     private http: HttpClient,
     private snackBar: MatSnackBar) {
+   }
+
+  getStarted() {
     this.getDates();
     this.getAllCovid19UKData(this.todaysFormattedDate)
-   }
+    console.log('UK', this.UK);
+  }
 
   getAllCovid19UKData(dateForUrl: string) {
     this.http.get<Covid19UKDataClass>(this.urlCovid19UKData + dateForUrl + '.json')
       .subscribe(
         allUKData => {
-          console.log('allUKData 1', allUKData);
-
           this.covid19UKData$ = of(allUKData);
-          console.log('allUKData 2', this.covid19UKData$);
-
           this.updateData(allUKData);          
-
         },
         err => {
           if (err.status === 404) {
@@ -92,8 +91,6 @@ export class Covid19UKDataService {
     this.updateUKCountries(UKData.countries);
     this.updateUKRegions(UKData.regions);
 
-    console.log('UK', this.UK);
-
     let totalDeathsInUK = 
     this.UK.countries.england['deaths'].value + 
     this.UK.countries.scotland['deaths'].value + 
@@ -101,8 +98,6 @@ export class Covid19UKDataService {
     this.UK.countries.wales['deaths'].value;
 
     this.UK.countries.totalDeathsInUK = totalDeathsInUK;
-
-    console.log('totalDeathsInUK', totalDeathsInUK);
   }
 
   updateUKCountries(countries: any) {
