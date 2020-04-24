@@ -44,6 +44,7 @@ export class LiveChartComponent implements OnInit, OnChanges {
       history.forEach(element => {
         if (element.country === 'UK' && element.province === null) {
           this.countryTimeline = element.timeline;
+          console.log('UK History', this.countryTimeline);
         }
       });
     } else {
@@ -51,6 +52,7 @@ export class LiveChartComponent implements OnInit, OnChanges {
       history.forEach(element => {
         if (element.country === country) {
           this.countryHistory = element.timeline;
+          console.log('Country History', this.countryHistory);
         }
       })
     }
@@ -61,6 +63,7 @@ export class LiveChartComponent implements OnInit, OnChanges {
     this.covid19.getCurrentData(country)
     .subscribe( 
       data => {
+        console.log('country', data);
         this.currentLiveCovid19Data = data;
       },
         (err: HttpErrorResponse) => {

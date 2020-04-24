@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Covid19DataClass, HistoricalDataClass } from '../_models/covid19';
-import { Covid19UKDataClass } from '../_models/covid19UK';
 
 @Injectable({
   providedIn: 'root'
