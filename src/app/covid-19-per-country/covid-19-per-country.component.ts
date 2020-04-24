@@ -14,8 +14,10 @@ export class Covid19PerCountryComponent implements OnInit, OnChanges {
   @Input() country: string;
   currentLiveCovid19Data: Covid19DataClass;
   historicalData: HistoricalDataClass;
-  countryTimeline: TimeLineClass;
   countryHistory: TimeLineClass;
+  countryDeathsArray = [];
+  countryCasesArray = [];
+  countryRecoveredArray = [];
   counto: any;
 
   constructor(
@@ -43,8 +45,8 @@ export class Covid19PerCountryComponent implements OnInit, OnChanges {
     if (country === 'UK') {
       history.forEach(element => {
         if (element.country === 'UK' && element.province === null) {
-          this.countryTimeline = element.timeline;
-          console.log('UK History', this.countryTimeline);
+          this.countryHistory = element.timeline;
+          console.log('UK History', this.countryHistory);
         }
       });
     } else {
@@ -57,7 +59,9 @@ export class Covid19PerCountryComponent implements OnInit, OnChanges {
         }
       })
     }
-    
+    this.countryDeathsArray = this.turnObject2Array(this.countryHistory.deaths);
+    this.countryCasesArray = this.turnObject2Array(this.countryHistory.cases);
+    this.countryRecoveredArray = this.turnObject2Array(this.countryHistory.recovered);
   }
 
   getLiveCovid19Data(country: string) {
@@ -74,6 +78,14 @@ export class Covid19PerCountryComponent implements OnInit, OnChanges {
           });
         }
       )
+  }
+
+  turnObject2Array(currentObject: object) {
+    const newArray = [];
+    Object.entries(currentObject).map(([key, val]) => {
+      newArray.push({date: key, deaths: val});
+    })
+    return newArray;
   }
 
 } 

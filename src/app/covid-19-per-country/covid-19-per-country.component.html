@@ -1,58 +1,54 @@
-<!-- <pre>{{currentLiveCovid19Data.country | json}}</pre> -->
-<div class="row margin">
-    <div class="col-12 col-xl-10 mx-auto">
-        <mat-card *ngIf="currentLiveCovid19Data?.country" class="w-100 mat-elevation-z4">
-            <mat-card-header>
-                <div class="d-flex flex-row">
-                    <img *ngIf="country" src="{{currentLiveCovid19Data?.countryInfo?.flag}}" alt="Country flag" style="width: 50px; height: 25px;">
-                    <mat-card-title class="ml-3">{{currentLiveCovid19Data.country }}</mat-card-title>
-                </div>
-            </mat-card-header>
-            <!-- <img mat-card-image *ngIf="country" src="{{currentLiveCovid19Data?.countryInfo?.flag}}" alt="Country flag"> -->
-            <app-map 
-                [lat]="currentLiveCovid19Data?.countryInfo?.lat"
-                [long]="currentLiveCovid19Data.countryInfo?.long"
-                [zoom]="4">
-            </app-map>
-    
-            <mat-card-content>
-                <div class="row">
-                    <div class="col-12 col-sm-12 col-md-4">
-                        <h6>Tested:</h6>
-                        <h1 counto 
-                            [step]="10" 
-                            [countTo]="currentLiveCovid19Data.tests"
-                            [countFrom]="0"
-                            [duration]="1"
-                            (countoChange)="counto = $event">
-                            {{counto | number}}
-                        </h1>
-                    </div>
-                    
-                    <div class="col-12 col-sm-12 col-md-4">
-                        <hr class="d-block d-sm-block d-md-none">
-                        <h6>Deaths:</h6>
-                        <h1 class="text-danger">{{currentLiveCovid19Data.deaths | number:'2.'}}</h1>
-                        <hr class="d-block d-sm-block d-md-none">
-                    </div>
+<div *ngIf="currentLiveCovid19Data?.country" class="row">
+    <mat-card class="col-10 mx-auto mat-elevation-z4">
+        <mat-card-header>
+            <div class="d-flex flex-row">
+                <img *ngIf="country" src="{{currentLiveCovid19Data?.countryInfo?.flag}}" alt="Country flag" style="width: 50px; height: 25px;">
+                <mat-card-title class="ml-3">{{currentLiveCovid19Data.country }}</mat-card-title>
+            </div>
+        </mat-card-header>
 
-                    <div class="col-12 col-sm-12 col-md-4">
-                        <h6>Cases:</h6>
-                        <h1>{{currentLiveCovid19Data.cases | number:'2.'}}</h1>
-                    </div>
+        <app-map 
+            [lat]="currentLiveCovid19Data?.countryInfo?.lat"
+            [long]="currentLiveCovid19Data.countryInfo?.long"
+            [zoom]="4">
+        </app-map>
 
+        <mat-card-content>
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-4">
+                    <h6>Tested:</h6>
+                    <h1 counto 
+                        [step]="10" 
+                        [countTo]="currentLiveCovid19Data.tests"
+                        [countFrom]="0"
+                        [duration]="1"
+                        (countoChange)="counto = $event">
+                        {{counto | number}}
+                    </h1>
                 </div>
-            </mat-card-content>
-            <mat-card-actions>
+                
+                <div class="col-12 col-sm-12 col-md-4">
+                    <hr class="d-block d-sm-block d-md-none">
+                    <h6>Deaths:</h6>
+                    <h1 class="text-danger">{{currentLiveCovid19Data.deaths | number:'2.'}}</h1>
+                    <hr class="d-block d-sm-block d-md-none">
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-4">
+                    <h6>Cases:</h6>
+                    <h1>{{currentLiveCovid19Data.cases | number:'2.'}}</h1>
+                </div>
+
+                 <mat-card-actions>
             </mat-card-actions>
-        </mat-card>
-    </div>
 
+            </div>
+        </mat-card-content>
+
+    </mat-card>
 </div>
+
+<app-covid19-country-history *ngIf="currentLiveCovid19Data?.country" [data]="countryDeathsArray"></app-covid19-country-history>
 
 <!-- <pre>{{currentLiveCovid19Data | json}}</pre> -->
-
-<div *ngFor="let country of countriesInUK$ | async">
-    <pre>{{country}}, Deaths: {{country.deaths.value}}</pre>
-</div>
 
