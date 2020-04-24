@@ -5,11 +5,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-live-chart',
-  templateUrl: './live-chart.component.html',
-  styleUrls: ['./live-chart.component.scss']
+  selector: 'app-covid-19-per-country',
+  templateUrl: './covid-19-per-country.component.html',
+  styleUrls: ['./covid-19-per-country.component.scss']
 })
-export class LiveChartComponent implements OnInit, OnChanges {
+export class Covid19PerCountryComponent implements OnInit, OnChanges {
 
   @Input() country: string;
   currentLiveCovid19Data: Covid19DataClass;
@@ -52,7 +52,8 @@ export class LiveChartComponent implements OnInit, OnChanges {
       history.forEach(element => {
         if (element.country === country) {
           this.countryHistory = element.timeline;
-          console.log('Country History', this.countryHistory);
+          console.log('Country History', this.countryHistory
+          );
         }
       })
     }

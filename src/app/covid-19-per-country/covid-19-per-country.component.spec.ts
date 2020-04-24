@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LiveChartComponent } from './live-chart.component';
+import { Covid19PerCountryComponent } from './covid-19-per-country.component';
 
-describe('LiveChartComponent', () => {
-  let component: LiveChartComponent;
-  let fixture: ComponentFixture<LiveChartComponent>;
+describe('Covid19PerCountryComponent', () => {
+  let component: Covid19PerCountryComponent;
+  let fixture: ComponentFixture<Covid19PerCountryComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LiveChartComponent ]
+      declarations: [ Covid19PerCountryComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LiveChartComponent);
+    fixture = TestBed.createComponent(Covid19PerCountryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
