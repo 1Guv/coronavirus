@@ -1,11 +1,8 @@
 <div *ngIf="data" class="row">
     <mat-card class="col-10 my-3 mx-auto mat-elevation-z4">
-      <h1>History</h1>
-      
-      <div *ngFor="let covid19 of data">
-          <span>Date: {{covid19.date}} - Deaths: {{covid19.deaths}}</span>
-      </div>
-      
-      <!-- <pre>{{data | json}}</pre> -->
+      <h1>Deaths per day</h1>
+
+      <app-column-chart [data]="data"></app-column-chart>
+    
     </mat-card>
   </div>

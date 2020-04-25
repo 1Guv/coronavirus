@@ -9,6 +9,7 @@ import { MaterialModule } from './_material/all-angular-material-modules';
 import { MapComponent } from './_elements/map/map.component';
 import { CountoModule }  from 'angular2-counto';
 import { Covid19CountryHistoryComponent } from './_elements/covid19-country-history/covid19-country-history.component';
+import { ColumnChartComponent } from './_elements/charts/column-chart/column-chart.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { Covid19CountryHistoryComponent } from './_elements/covid19-country-hist
     Covid19PerCountryComponent,
     MapComponent,
     Covid19CountryHistoryComponent,
+    ColumnChartComponent,
   ],
   imports: [
     BrowserModule,
