@@ -68,7 +68,7 @@ export class Covid19PerCountryComponent implements OnInit, OnChanges {
     this.countryRecoveredArray = this.turnObject2Array(this.countryHistory.recovered);
 
     this.countryDeathsPerDayArray = this.calcDeathsPerDay(this.countryDeathsArray);
-    
+    console.log('this.countryDeathsPerDayArray', this.countryDeathsPerDayArray);
   }
 
   getLiveCovid19Data(country: string) {
@@ -101,7 +101,7 @@ export class Covid19PerCountryComponent implements OnInit, OnChanges {
 
     for (let i=1; i<totalsPerDay.length; i++) {
       day = totalsPerDay[i].deaths - totalsPerDay[i-1].deaths;
-      perDay.push({date: totalsPerDay[i].date, deaths: day});
+      perDay.push({date: totalsPerDay[i].date, deaths: day, day: i});
     }
     return perDay;
   }
