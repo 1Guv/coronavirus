@@ -54,6 +54,7 @@ export class ColumnChartComponent implements OnInit, OnChanges {
     let columnTemplate = series.columns.template;
     columnTemplate.strokeWidth = 2;
     columnTemplate.strokeOpacity = 1;
+
   }
 
 }

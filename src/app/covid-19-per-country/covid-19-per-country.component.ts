@@ -3,6 +3,7 @@ import { Covid191Service } from '../_services/covid19-1.service';
 import { Covid19DataClass, TimeLineClass, HistoricalDataClass } from '../_models/covid19';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { array, keyboard } from '@amcharts/amcharts4/core';
 
 @Component({
   selector: 'app-covid-19-per-country',
@@ -15,7 +16,10 @@ export class Covid19PerCountryComponent implements OnInit, OnChanges {
   currentLiveCovid19Data: Covid19DataClass;
   historicalData: HistoricalDataClass;
   countryHistory: TimeLineClass;
+  
   countryDeathsArray = [];
+  countryDeathsPerDayArray = [];
+
   countryCasesArray = [];
   countryRecoveredArray = [];
   counto: any;
@@ -62,6 +66,9 @@ export class Covid19PerCountryComponent implements OnInit, OnChanges {
     this.countryDeathsArray = this.turnObject2Array(this.countryHistory.deaths);
     this.countryCasesArray = this.turnObject2Array(this.countryHistory.cases);
     this.countryRecoveredArray = this.turnObject2Array(this.countryHistory.recovered);
+
+    this.countryDeathsPerDayArray = this.calcDeathsPerDay(this.countryDeathsArray);
+    
   }
 
   getLiveCovid19Data(country: string) {
@@ -86,6 +93,17 @@ export class Covid19PerCountryComponent implements OnInit, OnChanges {
       newArray.push({date: key, deaths: val});
     })
     return newArray;
+  }
+
+  calcDeathsPerDay(totalsPerDay: any) {
+    const perDay = [];
+    let day: number;
+
+    for (let i=1; i<totalsPerDay.length; i++) {
+      day = totalsPerDay[i].deaths - totalsPerDay[i-1].deaths;
+      perDay.push({date: totalsPerDay[i].date, deaths: day});
+    }
+    return perDay;
   }
 
 } 
