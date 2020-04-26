@@ -13,15 +13,20 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 export class ColumnChartComponent implements OnInit, OnChanges {
 
   @Input() data: any;
+  private chart: am4charts.XYChart;
 
   constructor() {
-
   }
 
   ngOnInit() {
   }
 
   ngOnChanges() {
+    this.maybeDisposeChart(this.chart);
+    this.createChart();
+  }
+
+  createChart() {
     am4core.useTheme(am4themes_material);
     am4core.useTheme(am4themes_animated);
 
@@ -55,6 +60,13 @@ export class ColumnChartComponent implements OnInit, OnChanges {
     columnTemplate.strokeWidth = 2;
     columnTemplate.strokeOpacity = 1;
 
+    this.chart = chart;
+  }
+
+  maybeDisposeChart(chart: any) {
+    if (chart) {
+      chart.dispose();
+    }
   }
 
 }
