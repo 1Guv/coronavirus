@@ -1,17 +1,25 @@
-<div class="container-flex my-3 text-center" style="background-color: #F8F8F8;">
-  <h1>Latest Coronavirus Stats</h1>
-
-  <div class="mt-1 mb-2">
-    <mat-form-field appearance="fill">
-      <mat-label>Countries</mat-label>
-      <mat-select [(value)]="selected" (selectionChange)="onCountrySelected(selected)">
-        <mat-option *ngFor="let country of countries" [value]="country.name">
-          {{country.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+<div id="app-container" class="text-center">
+  
+  <div class="">
+    <h1 class="pt-5 pb-2">Latest Coronavirus Stats</h1>
+    <div class="row">
+      <div class="mx-auto">
+        <mat-form-field appearance="fill">
+          <mat-label>Countries</mat-label>
+          <mat-select [(value)]="selected" (selectionChange)="onCountrySelected(selected)">
+            <mat-option *ngFor="let country of countries" [value]="country.name">
+              {{country.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
   </div>
+
+  <img src="../assets/2329747.jpg" class="app-img-fluid mb-3">
   
   <app-covid-19-per-country [country]="selected"></app-covid-19-per-country>
+
+  <img src="../assets/stay-home-nhs.png" class="img-fluid">
 
 </div>
