@@ -10,6 +10,7 @@ import { MapComponent } from './_elements/map/map.component';
 import { CountoModule }  from 'angular2-counto';
 import { Covid19CountryHistoryComponent } from './_elements/covid19-country-history/covid19-country-history.component';
 import { ColumnChartComponent } from './_elements/charts/column-chart/column-chart.component';
+import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ColumnChartComponent } from './_elements/charts/column-chart/column-cha
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-    CountoModule
+    CountoModule,
+    ScrollToModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
