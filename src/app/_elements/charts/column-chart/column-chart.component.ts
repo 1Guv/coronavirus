@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ViewChild, ElementRef } from '@angular/core';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_material from "@amcharts/amcharts4/themes/material";
@@ -13,24 +13,40 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 export class ColumnChartComponent implements OnInit, OnChanges {
 
   @Input() data: any;
+  @Input() divCreate: string;
+  @ViewChild('chartElement', {static: true}) chartElement: ElementRef<HTMLElement>;
+  divCreatedForChart: boolean = false;
+  counter: number = 1;
   private chart: am4charts.XYChart;
 
   constructor() {
   }
 
   ngOnInit() {
+    if (this.counter === 1 && this.divCreatedForChart) {
+      this.maybeDisposeChart(this.chart);
+      this.createChart();
+    }
+    this.counter ++;
   }
 
   ngOnChanges() {
-    this.maybeDisposeChart(this.chart);
-    this.createChart();
+    if (this.chartElement.nativeElement.id === this.divCreate) {
+      this.divCreatedForChart = true;
+    }
+
+    if (this.divCreatedForChart) {
+      this.maybeDisposeChart(this.chart);
+      this.createChart();
+    }
   }
 
   createChart() {
+
     am4core.useTheme(am4themes_material);
     am4core.useTheme(am4themes_animated);
 
-    let chart = am4core.create("chartdiv", am4charts.XYChart);
+    let chart = am4core.create(this.divCreate, am4charts.XYChart);
 
     chart.data = this.data;
 
@@ -59,6 +75,7 @@ export class ColumnChartComponent implements OnInit, OnChanges {
     columnTemplate.strokeOpacity = 1;
 
     this.chart = chart;
+
   }
 
   maybeDisposeChart(chart: any) {

@@ -8,6 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class Covid19CountryHistoryComponent implements OnInit {
 
   @Input() data: any;
+  @Input() title: string;
+  @Input() divName: string;
 
   constructor() { }
 

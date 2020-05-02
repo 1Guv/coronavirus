@@ -21,6 +21,8 @@ export class Covid19PerCountryComponent implements OnInit, OnChanges {
   countryDeathsPerDayArray = [];
 
   countryCasesArray = [];
+  countryCasesPerDayArray =[];
+
   countryRecoveredArray = [];
   counto: any;
 
@@ -62,12 +64,15 @@ export class Covid19PerCountryComponent implements OnInit, OnChanges {
         }
       })
     }
+
+    // console.log('Country History', this.countryHistory);
+
     this.countryDeathsArray = this.turnObject2Array(this.countryHistory.deaths);
     this.countryCasesArray = this.turnObject2Array(this.countryHistory.cases);
     this.countryRecoveredArray = this.turnObject2Array(this.countryHistory.recovered);
 
     this.countryDeathsPerDayArray = this.calcDeathsPerDay(this.countryDeathsArray);
-    // console.log('this.countryDeathsPerDayArray', this.countryDeathsPerDayArray);
+    this.countryCasesPerDayArray = this.calcDeathsPerDay(this.countryCasesArray);
   }
 
   getLiveCovid19Data(country: string) {
