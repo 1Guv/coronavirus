@@ -24,6 +24,7 @@ export class Covid19PerCountryComponent implements OnInit, OnChanges {
   countryCasesPerDayArray =[];
 
   countryRecoveredArray = [];
+  countryRecoveredPerDayArray = [];
   counto: any;
 
   constructor(
@@ -73,6 +74,7 @@ export class Covid19PerCountryComponent implements OnInit, OnChanges {
 
     this.countryDeathsPerDayArray = this.calcDeathsPerDay(this.countryDeathsArray);
     this.countryCasesPerDayArray = this.calcDeathsPerDay(this.countryCasesArray);
+    this.countryRecoveredPerDayArray = this.calcDeathsPerDay(this.countryRecoveredArray);
   }
 
   getLiveCovid19Data(country: string) {
