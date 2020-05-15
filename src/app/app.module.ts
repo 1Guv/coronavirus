@@ -12,6 +12,15 @@ import { Covid19CountryHistoryComponent } from './_elements/covid19-country-hist
 import { ColumnChartComponent } from './_elements/charts/column-chart/column-chart.component';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 
+import { FusionChartsModule } from "angular-fusioncharts";
+
+// Import FusionCharts library and chart modules
+import * as FusionCharts from "fusioncharts";
+import * as charts from "fusioncharts/fusioncharts.charts";
+import * as FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
+import { FusionChartsComponent } from './_elements/charts/fusion-charts/fusion-charts.component';
+FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,6 +28,7 @@ import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
     MapComponent,
     Covid19CountryHistoryComponent,
     ColumnChartComponent,
+    FusionChartsComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +36,8 @@ import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
     BrowserAnimationsModule,
     MaterialModule,
     CountoModule,
-    ScrollToModule.forRoot()
+    ScrollToModule.forRoot(),
+    FusionChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
