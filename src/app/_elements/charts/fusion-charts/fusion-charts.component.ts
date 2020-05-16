@@ -20,10 +20,10 @@ export class FusionChartsComponent implements OnInit, OnChanges {
     if (this.data) {
       const dataSource = {
         chart: {
-          caption: 'Deaths',
+          caption: 'Deaths per day',
           subCaption: '',
           xAxisName: 'Days',
-          yAxisName: 'Deaths',
+          yAxisName: '',
           // numberSuffix: 'K',
           theme: 'fusion'
         },
