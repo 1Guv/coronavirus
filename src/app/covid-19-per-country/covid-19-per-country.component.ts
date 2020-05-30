@@ -17,16 +17,8 @@ export class Covid19PerCountryComponent implements OnInit, OnChanges {
   countryHistory: TimeLineClass;
   
   countryDeathsArray = [];
-  
   countryDeathsPerDayArray = [];
-  countryDeathsPerDayArray2 = [];
-
-  countryCasesArray = [];
-  countryCasesPerDayArray =[];
-
-  countryRecoveredArray = [];
-  countryRecoveredPerDayArray = [];
-  counto: any;
+  counto: any; // used for the count animation
 
   constructor(
     private covid19: Covid191Service,
@@ -67,23 +59,14 @@ export class Covid19PerCountryComponent implements OnInit, OnChanges {
       })
     }
 
-    // console.log('Country History', this.countryHistory);
-
     this.countryDeathsArray = this.turnObject2Array(this.countryHistory.deaths);
-    this.countryCasesArray = this.turnObject2Array(this.countryHistory.cases);
-    this.countryRecoveredArray = this.turnObject2Array(this.countryHistory.recovered);
-
     this.countryDeathsPerDayArray = this.calcDeathsPerDay(this.countryDeathsArray);
-    // Changing data to use Fusion charts as current is slow
-    this.countryDeathsPerDayArray2 = this.calcDeathsPerDay2(this.countryDeathsArray);
-    this.countryCasesPerDayArray = this.calcDeathsPerDay(this.countryCasesArray);
-    this.countryRecoveredPerDayArray = this.calcDeathsPerDay(this.countryRecoveredArray);
+
   }
 
   getLiveCovid19Data(country: string) {
     this.covid19.getCurrentData(country)
-    .subscribe( 
-      data => {
+    .subscribe((data: Covid19DataClass) => {
         // console.log('country', data);
         this.currentLiveCovid19Data = data;
       },
@@ -105,17 +88,6 @@ export class Covid19PerCountryComponent implements OnInit, OnChanges {
   }
 
   calcDeathsPerDay(totalsPerDay: any) {
-    const perDay = [];
-    let day: number;
-
-    for (let i=1; i<totalsPerDay.length; i++) {
-      day = totalsPerDay[i].deaths - totalsPerDay[i-1].deaths;
-      perDay.push({date: totalsPerDay[i].date, deaths: day, day: i});
-    }
-    return perDay;
-  }
-
-  calcDeathsPerDay2(totalsPerDay: any) {
     const perDay = [];
     let day: number;
 
