@@ -5,7 +5,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { Covid19PerCountryComponent } from './covid-19-per-country/covid-19-per-country.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './_material/all-angular-material-modules';
+
+import {MatSelectModule} from '@angular/material/select';
+import {MatCardModule} from '@angular/material/card';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 import { MapComponent } from './_elements/map/map.component';
 import { CountoModule }  from 'angular2-counto';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
@@ -30,7 +34,9 @@ FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModule,
+    MatSelectModule,
+    MatCardModule,
+    MatSnackBarModule,
     CountoModule,
     ScrollToModule.forRoot(),
     FusionChartsModule
