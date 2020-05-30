@@ -3,7 +3,6 @@ import { Covid191Service } from '../_services/covid19-1.service';
 import { Covid19DataClass, TimeLineClass, HistoricalDataClass } from '../_models/covid19';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { array, keyboard } from '@amcharts/amcharts4/core';
 
 @Component({
   selector: 'app-covid-19-per-country',
