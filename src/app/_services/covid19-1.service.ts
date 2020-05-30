@@ -8,16 +8,15 @@ import { Observable } from 'rxjs';
 })
 export class Covid191Service {
 
-  urlCurrent: string = 'https://corona.lmao.ninja/v2/countries/';
-  urlHistorical: string = 'https://corona.lmao.ninja/v2/historical/';
+  url : string = 'https://corona.lmao.ninja/v2/';
 
   constructor(private http: HttpClient) { }
 
   getCurrentData(country: string): Observable<Covid19DataClass> {
-    return this.http.get<Covid19DataClass>(this.urlCurrent + country);
+    return this.http.get<Covid19DataClass>(this.url + 'countries/' + country);
   }
 
   getHistoricalData(): Observable<HistoricalDataClass[]> {
-    return this.http.get<HistoricalDataClass[]>(this.urlHistorical);
+    return this.http.get<HistoricalDataClass[]>(this.url + 'historical/');
   }
 }

@@ -33,3 +33,13 @@ export class TimeLineClass {
     deaths: Object;
     recovered: Object;
 }
+
+export class DeathsPerDayClass {
+    date: string;
+    deaths: number;
+}
+
+export class DeathsPerDayForFusionChartsClass {
+    label: string;
+    value: number;
+}

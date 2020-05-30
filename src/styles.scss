@@ -1,10 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import url('https://fonts.googleapis.com/css2?family=Oswald&family=Pacifico&display=swap');
-@import "~leaflet/dist/leaflet.css";
+@import "~leaflet/dist/leaflet.css"; // this is used for interactive map - https://leafletjs.com/
 
 html, body {
     font-family: 'Oswald', sans-serif !important;
-    // background-color: #F8F8F8;
     background-color: #d2efeb;
 }

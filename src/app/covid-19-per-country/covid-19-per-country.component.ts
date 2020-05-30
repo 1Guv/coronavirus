@@ -1,8 +1,12 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Covid191Service } from '../_services/covid19-1.service';
-import { Covid19DataClass, TimeLineClass, HistoricalDataClass } from '../_models/covid19';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Covid19DataClass, 
+  TimeLineClass, 
+  HistoricalDataClass, 
+  DeathsPerDayClass, 
+  DeathsPerDayForFusionChartsClass } from '../_models/covid19';
 
 @Component({
   selector: 'app-covid-19-per-country',
@@ -16,8 +20,9 @@ export class Covid19PerCountryComponent implements OnInit, OnChanges {
   historicalData: HistoricalDataClass;
   countryHistory: TimeLineClass;
   
-  countryDeathsArray = [];
-  countryDeathsPerDayArray = [];
+  countryDeathsArray: Array<DeathsPerDayClass>;
+  countryDeathsPerDayArray: Array<DeathsPerDayForFusionChartsClass>;
+
   counto: any; // used for the count animation
 
   constructor(
@@ -79,7 +84,7 @@ export class Covid19PerCountryComponent implements OnInit, OnChanges {
       )
   }
 
-  turnObject2Array(currentObject: object) {
+  turnObject2Array(currentObject: object): Array<DeathsPerDayClass> {
     const newArray = [];
     Object.entries(currentObject).map(([key, val]) => {
       newArray.push({date: key, deaths: val});
@@ -87,7 +92,7 @@ export class Covid19PerCountryComponent implements OnInit, OnChanges {
     return newArray;
   }
 
-  calcDeathsPerDay(totalsPerDay: any) {
+  calcDeathsPerDay(totalsPerDay: Array<DeathsPerDayClass>): Array<DeathsPerDayForFusionChartsClass> {
     const perDay = [];
     let day: number;
 

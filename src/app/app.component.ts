@@ -8,7 +8,7 @@ import { ScrollToService, ScrollToConfigOptions } from '@nicky-lenaers/ngx-scrol
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'coronavirus';
+  title = 'Latest Coronavirus Stats';
   countries: any = countriesData;
   selected: string;
 

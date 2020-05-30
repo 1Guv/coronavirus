@@ -1,18 +1,18 @@
 <div id="app-container" class="text-center">
   
-  <div class="">
-    <h1 class="pt-5 pb-2">Latest Coronavirus Stats</h1>
-    <div class="row">
-      <div class="mx-auto">
-        <mat-form-field appearance="fill">
-          <mat-label>Countries</mat-label>
-          <mat-select [(value)]="selected" (selectionChange)="onCountrySelected(selected)">
-            <mat-option *ngFor="let country of countries" [value]="country.name">
-              {{country.name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+  <h1 class="pt-5 pb-2">{{ title }}</h1>
+  <div class="row">
+    <div class="mx-auto">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Countries</mat-label>
+        <mat-select [(value)]="selected" (selectionChange)="onCountrySelected(selected)">
+          <mat-option *ngFor="let country of countries" [value]="country.name">
+            {{country.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      
     </div>
   </div>
 

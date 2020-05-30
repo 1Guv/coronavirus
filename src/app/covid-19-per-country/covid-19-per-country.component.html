@@ -3,7 +3,7 @@
         <mat-card-header>
             <div class="d-flex flex-row">
                 <img *ngIf="country" src="{{currentLiveCovid19Data?.countryInfo?.flag}}" alt="Country flag" class="flag ml-1">
-                <mat-card-title class="ml-3">{{currentLiveCovid19Data.country }}</mat-card-title>
+                <mat-card-title class="ml-3">{{ currentLiveCovid19Data.country }}</mat-card-title>
             </div>
         </mat-card-header>
 
@@ -30,17 +30,14 @@
                 <div class="col-12 col-sm-12 col-md-4">
                     <hr class="d-block d-sm-block d-md-none">
                     <h6>Deaths:</h6>
-                    <h1 class="text-danger">{{currentLiveCovid19Data.deaths | number:'2.'}}</h1>
+                    <h1 class="text-danger">{{ currentLiveCovid19Data.deaths | number:'2.' }}</h1>
                     <hr class="d-block d-sm-block d-md-none">
                 </div>
 
                 <div class="col-12 col-sm-12 col-md-4">
                     <h6>Cases:</h6>
-                    <h1>{{currentLiveCovid19Data.cases | number:'2.'}}</h1>
+                    <h1>{{ currentLiveCovid19Data.cases | number:'2.'}}</h1>
                 </div>
-
-                 <mat-card-actions>
-            </mat-card-actions>
 
             </div>
         </mat-card-content>
@@ -48,7 +45,9 @@
     </mat-card>
 </div>
 
-<app-fusion-charts *ngIf="currentLiveCovid19Data?.country" [data]="countryDeathsPerDayArray"></app-fusion-charts>
+<app-fusion-charts *ngIf="currentLiveCovid19Data?.country" 
+                   [data]="countryDeathsPerDayArray">
+</app-fusion-charts>
 
 <p>built by <a href="https://www.linkedin.com/in/guv-singh/" target="_blank" class="text-muted">Guv Singh</a> during the lockdown and data provided by <a href="https://github.com/NovelCOVID/api" target="_blank">NovelCovid/API</a></p>
 
