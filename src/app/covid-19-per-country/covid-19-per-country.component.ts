@@ -96,10 +96,25 @@ export class Covid19PerCountryComponent implements OnInit, OnChanges {
     const perDay = [];
     let day: number;
 
-    for (let i=1; i<totalsPerDay.length; i++) {
-      day = totalsPerDay[i].deaths - totalsPerDay[i-1].deaths;
-      perDay.push({label: totalsPerDay[i].date, value: day});
+    for (let i=0; i<totalsPerDay.length-1; i++) {
+      // used this iterator so I can use the position of the array for the subtraction eg [i+1]-[i]
+      day = totalsPerDay[i+1].deaths - totalsPerDay[i].deaths;
+      perDay.push(
+        {
+          label: totalsPerDay[i].date, 
+          value: day
+        }
+      );
     }
+
+    // push the deaths for today to the end of the array
+    perDay.push(
+      {
+        label: totalsPerDay[totalsPerDay.length-1].date, 
+        value: this.currentLiveCovid19Data.todayDeaths
+      }
+    );
+
     return perDay;
   }
 
