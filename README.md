@@ -9,11 +9,17 @@ Generated with [Angular 9](https://angular.io/) using [Angular CLI](https://gith
 ## Dependencies used for this project
 
 [Angular Material](https://material.angular.io/components/categories)
+
 [Bootstrap 4.0](https://getbootstrap.com/)
+
 [Ngx-scroll-to](https://www.npmjs.com/package/@nicky-lenaers/ngx-scroll-to)
+
 [Fusion Charts](https://www.fusioncharts.com/) for showing the 3d charts
+
 [Counto](https://www.npmjs.com/package/angular2-counto) for number animation
+
 [Leaflet](https://leafletjs.com/) for open-source interactive maps
+
 
 ## To run this project
 
