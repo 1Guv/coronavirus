@@ -1,7 +1,7 @@
 import { TestBed, async } from '@angular/core/testing';
 import { Covid191Service } from './covid19-1.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { Covid19DataClass } from '../_models/covid19';
+import { Covid19DataClass, HistoricalDataClass } from '../_models/covid19';
 
 describe('Covid191Service', () => {
 
@@ -32,8 +32,19 @@ describe('Covid191Service', () => {
       req.flush({payload: Object.values(Covid19DataClass)});
   })
 
+  it('should get covid-19 historical data', () => {
+    component.getHistoricalData()
+      .subscribe(history => {
+        expect(history).toBeTruthy('No history returned');
+      });
+
+      const req = httpTestingController.expectOne('https://corona.lmao.ninja/v2/historical/');
+      expect(req.request.method).toEqual("GET");
+      req.flush({payload: Object.values(HistoricalDataClass)});
+  })
+
   afterEach(() => {
     // Making sure that no other http request is accidentally being made
     httpTestingController.verify();
-})
+  })
 });
