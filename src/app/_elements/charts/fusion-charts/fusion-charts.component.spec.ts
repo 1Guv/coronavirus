@@ -8,18 +8,12 @@ describe('FusionChartsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FusionChartsComponent ]
+      providers: [ FusionChartsComponent ]
     })
-    .compileComponents();
+   component = TestBed.get(FusionChartsComponent);
   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(FusionChartsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
+  it('should create Fusion Chart', () => {
     expect(component).toBeTruthy();
   });
 });

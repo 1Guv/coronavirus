@@ -8,18 +8,16 @@ describe('MapComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MapComponent ]
+      // declarations: [ MapComponent ]
+      providers: [
+        MapComponent
+      ]
     })
-    .compileComponents();
+    
+    component = TestBed.get(MapComponent);
   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(MapComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
+  it('should create map', () => {
     expect(component).toBeTruthy();
   });
 });
