@@ -31,4 +31,9 @@ describe('Covid191Service', () => {
       expect(req.request.method).toEqual("GET");
       req.flush({payload: Object.values(Covid19DataClass)});
   })
+
+  afterEach(() => {
+    // Making sure that no other http request is accidentally being made
+    httpTestingController.verify();
+})
 });
